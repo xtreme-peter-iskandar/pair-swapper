@@ -56,8 +56,9 @@ public class PairSwapperTests {
 
         List<Pair> pairs = subject.getNextPairs(pivotList);
 
-        File file = new File("~/.pair-history");
-        Assert.assertTrue(file.exists());
+        String userHome = System.getProperty("user.home");
+        File historyFile = new File(userHome + "/.pair-history");
+        Assert.assertTrue(historyFile.exists());
     }
 
 

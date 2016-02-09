@@ -45,4 +45,14 @@ public class Pair {
     public boolean hasPivot(Pivot pivot){
         return pivot1.equals(pivot) || pivot2.equals(pivot);
     }
+
+    public Pivot getPivot(Pivot pivot) {
+        if(pivot1.equals(pivot))
+            return pivot1;
+
+        if(pivot2.equals(pivot))
+            return pivot2;
+
+        return null;
+    }
 }
