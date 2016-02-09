@@ -55,4 +55,23 @@ public class Pair {
 
         return null;
     }
+
+    public Pivot getOtherPivot(Pivot pivot) {
+        if(pivot1.equals(pivot))
+            return pivot2;
+
+        if(pivot2.equals(pivot))
+            return pivot1;
+
+        return null;
+
+    }
+
+    @Override
+    public String toString() {
+        return "Pair{" +
+                "pivot1=" + pivot1 +
+                ", pivot2=" + pivot2 +
+                '}';
+    }
 }

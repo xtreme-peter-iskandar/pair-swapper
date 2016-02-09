@@ -21,26 +21,44 @@ public class PairSwapper {
                 pairList.add(new Pair(pivot1, pivot2));
             }
 
-
+            writeToFile(pairList,historyFile);
             return pairList;
         } else {
 
             List<Pair> previousPairs = readPairHistory(historyFile);
+            List<Pair> pairList = new ArrayList<>();
 
-            for (Pivot pivot :
-                    pivotList) {
+            for (int i = pivotList.size() -1 ; i > 0 && !pivotList.isEmpty(); i--) {
+                Pivot pivot = pivotList.get(0);
+
                 Map<Pivot, List<Pivot>> pivotMap = generatePivotMap(pivot, previousPairs);
+                List<Pivot> pivots = pivotMap.get(pivot);
 
+                int index = 0;
+                Pivot pivot2;
 
-                for (int i = 0; i < pivotList.size(); i++) {
-                    Pivot pivot1 = pivotList.get(i);
-
-
+                do {
+                    index++;
+                    pivot2 = pivotList.get(index);
                 }
+                while (pivots.contains(pivot2));
+
+                Pair pair = new Pair(pivot,pivot2);
+
+                pivotList.remove(pivot);
+                pivotList.remove(pivot2);
+                pairList.add(pair);
+                System.out.println("added pair: " + pair);
             }
 
 
-            return previousPairs;
+
+
+
+
+            writeToFile(pairList,historyFile);
+
+            return pairList;
         }
 
 
@@ -53,7 +71,7 @@ public class PairSwapper {
         List<Pivot> pivotList = new ArrayList<>();
         for (Pair pair : pairList) {
             if (pair.hasPivot(pivot)) {
-                pivotList.add(pair.getPivot(pivot));
+                pivotList.add(pair.getOtherPivot(pivot));
             }
         }
 
